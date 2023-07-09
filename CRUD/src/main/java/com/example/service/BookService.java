@@ -14,7 +14,7 @@ public class BookService {
 	@Autowired
 	private BookRepository bookRepository;
 	
-	public Book create (Book book) {
+	public Book addBook (Book book) {
 		return bookRepository.save(book);
 	}
 	
@@ -22,11 +22,11 @@ public class BookService {
 		return bookRepository.findAll();
 	}
 	
-	public void delete (Book book) {
+	public void deleteBook (Book book) {
 		bookRepository.delete(book); 
 	}
 	
-	public Optional<Book> findById (Long id) {
+	public Optional<Book> findBookById (Long id) {
 		return bookRepository.findById(id);
 	}
 	

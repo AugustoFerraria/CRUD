@@ -14,7 +14,7 @@ public class EditorService {
 	@Autowired
 	private EditorRepository editorRepository;
 	
-	public Editor create (Editor editor) {
+	public Editor addEditor (Editor editor) {
 		return editorRepository.save(editor);
 	}
 	
@@ -22,11 +22,11 @@ public class EditorService {
 		return editorRepository.findAll();
 	}
 	
-	public void delete (Editor editor) {
+	public void deleteEditor (Editor editor) {
 		editorRepository.delete(editor); 
 	}
 	
-	public Optional<Editor> findById (Long id) {
+	public Optional<Editor> findEditorById (Long id) {
 		return editorRepository.findById(id);
 	}
 }

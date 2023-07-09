@@ -14,7 +14,7 @@ public class AuthorService {
 	@Autowired
 	private AuthorRepository authorRepository;
 	
-	public Author create (Author author) {
+	public Author addAuthor (Author author) {
 		return authorRepository.save(author);
 	}
 	
@@ -22,11 +22,11 @@ public class AuthorService {
 		return authorRepository.findAll();
 	}
 	
-	public void delete (Author author) {
+	public void deleteAuthor (Author author) {
 		authorRepository.delete(author); 
 	}
 	
-	public Optional<Author> findById (Long id) {
+	public Optional<Author> findAuthorById (Long id) {
 		return authorRepository.findById(id);
 	}
 }
