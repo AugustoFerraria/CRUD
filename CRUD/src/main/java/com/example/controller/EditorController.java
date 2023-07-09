@@ -42,13 +42,13 @@ public class EditorController {
 	
 	
 	@GetMapping
-	private ResponseEntity<List<Editor>> listAllEditors (@RequestBody Editor editor){
+	private ResponseEntity<List<Editor>> listAllEditors (){
 		return ResponseEntity.ok(editorService.getAllEditors());
 	}
 	
-	@DeleteMapping
-	private ResponseEntity<Void> deleteEditor (@RequestBody Editor editor){
-		editorService.deleteEditor(editor);
+	@DeleteMapping (path = "{editorId}")
+	private ResponseEntity<Void> deleteEditor (@PathVariable("editorId") long editorId ){
+		editorService.deleteEditor(editorId);
 		return ResponseEntity.ok().build();
 	}
 	

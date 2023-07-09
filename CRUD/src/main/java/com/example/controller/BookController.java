@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.modelo.Book;
 import com.example.service.BookService;
+import com.example.service.BookService;
 
 
 @RestController
@@ -26,29 +27,24 @@ import com.example.service.BookService;
 public class BookController {
 	
 	@Autowired
+	private BookService editorService;
+	
+	@Autowired
 	private BookService bookService;
 	
 	@PostMapping
-	private ResponseEntity<Book> save (@RequestBody Book book){
-		Book temporal = bookService.addBook(book);
-		
-		try {
-			return ResponseEntity.created(new URI("/api/book"+temporal.getId())).body(temporal);
-			
-		}catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		}
+	private void addBook (@RequestBody Book book){
+		bookService.addBook(book);
 	}
-	
 	
 	@GetMapping
 	private ResponseEntity<List<Book>> listAllBooks (@RequestBody Book book){
 		return ResponseEntity.ok(bookService.getAllBooks());
 	}
 	
-	@DeleteMapping
-	private ResponseEntity<Void> deleteBook (@RequestBody Book book){
-		bookService.deleteBook(book);
+	@DeleteMapping (path = "{bookId}")
+	private ResponseEntity<Void> deleteBook (@PathVariable("bookId") long bookId ){
+		bookService.deleteBook(bookId);
 		return ResponseEntity.ok().build();
 	}
 	

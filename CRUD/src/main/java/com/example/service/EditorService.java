@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.exception.EditorNotFoundException;
 import com.example.modelo.Editor;
 import com.example.repository.EditorRepository;
 
@@ -22,9 +23,17 @@ public class EditorService {
 		return editorRepository.findAll();
 	}
 	
-	public void deleteEditor (Editor editor) {
-		editorRepository.delete(editor); 
-	}
+	public void deleteEditor(Long editorId) {
+        if(!editorRepository.existsById(editorId)) {
+            throw new RuntimeException();}
+        }
+    	
+        public void deleteEditor(long editorId) {
+            if(!editorRepository.existsById(editorId)) {
+                throw new EditorNotFoundException("Editor with id " + editorId + " does not exists");
+            }
+            editorRepository.deleteById(editorId);
+        }
 	
 	public Optional<Editor> findEditorById (Long id) {
 		return editorRepository.findById(id);

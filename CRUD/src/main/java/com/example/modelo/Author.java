@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "author")
@@ -27,5 +27,5 @@ public class Author {
     private String mail;
 
     @ManyToMany(mappedBy = "authors")
-    private Set<Book> books;
+    private List<Book> books;
 }

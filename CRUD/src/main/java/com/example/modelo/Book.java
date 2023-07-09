@@ -14,7 +14,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "book")
@@ -28,13 +30,18 @@ public class Book {
     private long id;
     private String title;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "book_author",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private Set<Author> authors;
+    private List<Author> authors;
 
     @ManyToOne
-    @JoinColumn(name = "editor_id")
+    @JoinColumn(name = "editor_id", referencedColumnName = "id")
     private Editor editor;
+    
+    //assignEditor 
+    
+    //addAutor
 }

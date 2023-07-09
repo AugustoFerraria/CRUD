@@ -40,13 +40,13 @@ public class AuthorController {
 	
 	
 	@GetMapping
-	private ResponseEntity<List<Author>> listAllAuthors (@RequestBody Author author){
+	private ResponseEntity<List<Author>> listAllAuthors (){
 		return ResponseEntity.ok(authorService.getAllAuthors());
 	}
 	
-	@DeleteMapping
-	private ResponseEntity<Void> deleteAuthor (@RequestBody Author author){
-		authorService.deleteAuthor(author);
+	@DeleteMapping (path = "{author}")
+	private ResponseEntity<Void> deleteAuthor (@PathVariable("authorId") long authorId ){
+		authorService.deleteAuthor(authorId);
 		return ResponseEntity.ok().build();
 	}
 	

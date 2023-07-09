@@ -13,6 +13,8 @@ import lombok.Setter;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "editor")
 @Getter
@@ -25,7 +27,8 @@ public class Editor {
     private long id;
     private String name;
     private String mail;
-
+    
+    @JsonIgnore
     @OneToMany(mappedBy = "editor")
     private Set<Book> books;
 }
