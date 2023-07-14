@@ -1,14 +1,15 @@
 package com.example.service;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.exception.AuthorNotFoundException;
 import com.example.exception.BadRequestException;
 import com.example.exception.BookNotFoundException;
+import com.example.modelo.Author;
 import com.example.modelo.Book;
+import com.example.repository.AuthorRepository;
 import com.example.repository.BookRepository;
 
 @Service
@@ -16,14 +17,10 @@ public class BookService {
 	@Autowired
 	private BookRepository bookRepository;
 	
-	public void addBook (Book book) {
-		Boolean existsTitle = bookRepository.existsTitle(book.getTitle());
-		if (existsTitle) {
-			throw new BadRequestException("Book with title " + book.getTitle() + " already exists");
-		}
-			
-		bookRepository.save(book);
-	}
+	@Autowired
+	private AuthorRepository authorRepository;
+	
+	public void addBook(Book book){ bookRepository.save(book);}
 	
 	public List<Book> getAllBooks (){
 		return bookRepository.findAll();
@@ -37,12 +34,26 @@ public class BookService {
     }
 	
 	
-	public Optional<Book> findBookById (Long id) {
-		return bookRepository.findById(id);
-	}
+    public Book getBookById(Long bookId){
+        if(!bookRepository.existsById(bookId)) {
+            throw new BookNotFoundException(
+                    "Book with id " + bookId + " does not exists");
+        }
+        return bookRepository.findById(bookId).get();
+    }
 	
-	
-	
-	
-	
-	}
+    public void editBook(Book book) {
+        bookRepository.save(book);
+    }
+
+    public void assignAuthor(long bookId, long authorId) {
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new BookNotFoundException("Book with id " + bookId + " does not exist"));
+
+        Author author = authorRepository.findById(authorId)
+                .orElseThrow(() -> new AuthorNotFoundException("Author with id " + authorId + " does not exist"));
+
+        book.getAuthors().add(author);
+        bookRepository.save(book);
+    }
+}

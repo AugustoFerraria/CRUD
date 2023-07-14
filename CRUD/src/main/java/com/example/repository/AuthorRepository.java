@@ -12,7 +12,7 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
             "SELECT CASE WHEN COUNT(a) > 0 THEN " +
             "TRUE ELSE FALSE END " +
             "FROM Author a " +
-            "WHERE a.mail = ?1"
+            "WHERE a.name = ?1"
     )
-    Boolean selectExistsEmail(String mail);
+    Boolean existsName(String name);
 }

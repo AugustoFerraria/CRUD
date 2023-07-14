@@ -14,5 +14,5 @@ public interface EditorRepository extends JpaRepository<Editor, Long> {
             "FROM Editor e " +
             "WHERE e.mail = ?1"
     )
-    Boolean selectExistsEmail(String mail);
+    Boolean existsMail(String mail);
 }

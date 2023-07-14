@@ -29,15 +29,14 @@ public class EditorController {
 	private EditorService editorService;
 	
 	@PostMapping
-	private ResponseEntity<Editor> save (@RequestBody Editor editor){
-		Editor temporal = editorService.addEditor(editor);
-		
-		try {
-			return ResponseEntity.created(new URI("/api/editor"+temporal.getId())).body(temporal);
-			
-		}catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		}
+	private ResponseEntity<Editor> save(@RequestBody Editor editor) {
+	    Editor temporal = editorService.addEditor(editor);
+	    
+	    try {
+	        return ResponseEntity.created(new URI("/api/editor" + temporal.getId())).body(temporal);
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	    }
 	}
 	
 	
@@ -54,8 +53,8 @@ public class EditorController {
 	
 	@GetMapping 
 	(value = "{id}")
-	private ResponseEntity<Optional<Editor>> listEditorsByID (@PathVariable ("id") Long id){
-		return ResponseEntity.ok(editorService.findEditorById(id));
+	private ResponseEntity<Editor> listEditorsByID (@PathVariable ("id") Long id){
+	    return ResponseEntity.ok(editorService.getEditorById(id));
 	}
 	
 

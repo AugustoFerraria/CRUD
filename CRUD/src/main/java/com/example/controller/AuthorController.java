@@ -27,16 +27,17 @@ public class AuthorController {
 	private AuthorService authorService;
 	
 	@PostMapping
-	private ResponseEntity<Author> save (@RequestBody Author author){
-		Author temporal = authorService.addAuthor(author);
-		
-		try {
-			return ResponseEntity.created(new URI("/api/author"+temporal.getId())).body(temporal);
-			
-		}catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		}
+	private ResponseEntity<Author> save(@RequestBody Author author) {
+	    Author temporal = authorService.addAuthor(author);
+
+	    try {
+	        return ResponseEntity.created(new URI("/api/author/" + temporal.getId())).body(temporal);
+
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	    }
 	}
+
 	
 	
 	@GetMapping
@@ -51,8 +52,8 @@ public class AuthorController {
 	}
 	
 	@GetMapping (value = "{id}")
-	private ResponseEntity<Optional<Author>> listAuthorsByID (@PathVariable ("id") Long id){
-		return ResponseEntity.ok(authorService.findAuthorById(id));
+	private ResponseEntity<Author> listAuthorsByID (@PathVariable ("id") Long id){
+		return ResponseEntity.ok(authorService.getAuthorById(id));
 	}
 	
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.exception.AuthorNotFoundException;
+import com.example.exception.BadRequestException;
 import com.example.modelo.Author;
 import com.example.repository.AuthorRepository;
 
@@ -15,9 +16,14 @@ public class AuthorService {
 	@Autowired
 	private AuthorRepository authorRepository;
 	
-	public Author addAuthor (Author author) {
-		return authorRepository.save(author);
+	public Author addAuthor(Author author) {
+	    Boolean existsTitle = authorRepository.existsName(author.getName());
+	    if (existsTitle) {
+	        throw new BadRequestException("Author with title " + author.getName() + " already exists");
+	    }
+	    return authorRepository.save(author);
 	}
+
 	
 	public List<Author> getAllAuthors (){
 		return authorRepository.findAll();
@@ -30,9 +36,13 @@ public class AuthorService {
         authorRepository.deleteById(authorId);
     }
 	
-	public Optional<Author> findAuthorById (Long id) {
-		return authorRepository.findById(id);
-	}
+    public Author getAuthorById(Long authorId){
+        if(!authorRepository.existsById(authorId)) {
+            throw new AuthorNotFoundException(
+                    "Author with id " + authorId + " does not exists");
+        }
+        return authorRepository.findById(authorId).get();
+    }
     public void editAuthor(Author author) {
         authorRepository.save(author);
     }

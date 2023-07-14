@@ -41,7 +41,21 @@ public class Book {
     @JoinColumn(name = "editor_id", referencedColumnName = "id")
     private Editor editor;
     
-    //assignEditor 
+    public void Author(Author author){
+        authors.add(author);;
+        
+    }
     
-    //addAutor
+    public void deleteAuthors(Author author){
+        authors.remove(author);
+    }
+    
+    public void assignEditor(Editor editor) {
+        this.editor = editor;
+    }
+    
+    public void deleteAssignedEditor(){
+        this.editor = null;
+    }
+
 }
