@@ -1,5 +1,9 @@
 package com.example.modelo;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,10 +14,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "editor")
@@ -30,5 +30,5 @@ public class Editor {
     
     @JsonIgnore
     @OneToMany(mappedBy = "editor")
-    private Set<Book> books;
+    private List<Book> books;
 }
