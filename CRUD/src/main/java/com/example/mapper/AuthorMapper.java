@@ -1,7 +1,7 @@
 package com.example.mapper;
 
 import com.example.DTO.AuthorDTO;
-import com.example.modelo.Author;
+import com.example.entity.Author;
 
 public class AuthorMapper {
 	public static Author mapDTOToEntity(AuthorDTO authorDTO) {

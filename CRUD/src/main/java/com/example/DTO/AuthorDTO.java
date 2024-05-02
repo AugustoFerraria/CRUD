@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AuthorDTO {
 
-	private long id;
+	private Long id;
 	private String name;
 	private String mail;
 }

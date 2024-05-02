@@ -1,7 +1,7 @@
 package com.example.mapper;
 
 import com.example.DTO.BookDTO;
-import com.example.modelo.Book;
+import com.example.entity.Book;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -40,4 +40,3 @@ public class BookMapper {
 		return bookDTO;
 	}
 }
-

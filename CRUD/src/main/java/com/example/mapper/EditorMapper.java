@@ -1,7 +1,7 @@
 package com.example.mapper;
 
 import com.example.DTO.EditorDTO;
-import com.example.modelo.Editor;
+import com.example.entity.Editor;
 
 public class EditorMapper {
 	public static Editor mapDTOToEntity(EditorDTO editorDTO) {

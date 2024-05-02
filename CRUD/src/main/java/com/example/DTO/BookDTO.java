@@ -1,6 +1,6 @@
 package com.example.DTO;
 
-import com.example.modelo.Editor;
+import com.example.entity.Editor;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class BookDTO {
 
-	private long id;
+	private Long id;
 	private String title;
 	private Editor editor;
 }
